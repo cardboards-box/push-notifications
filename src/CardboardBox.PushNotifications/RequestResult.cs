@@ -140,6 +140,14 @@ public static class RequestResults
     /// The requested user has no topics so there was nothing to subscribe them to
     /// </summary>
     public const string USER_NO_TOPICS = "user-has-no-topics";
+    /// <summary>
+    /// The requested group has no subscribers so there was no devices to subscribe to the topic
+    /// </summary>
+    public const string GROUP_NO_SUBSCRIBERS = "group-has-no-subscribers";
+    /// <summary>
+    /// The requested group-topic map does not exist, but the request was ok
+    /// </summary>
+    public const string GROUP_MAP_NOT_FOUND = "group-topic-map-not-found";
     #endregion
 
     #region Bad request response codes

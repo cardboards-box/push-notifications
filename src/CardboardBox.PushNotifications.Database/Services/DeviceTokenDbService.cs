@@ -14,6 +14,21 @@ public interface IDeviceTokenDbService : IOrmMap<DeviceToken>
     /// <param name="profileId">The ID of the profile</param>
     /// <returns>The device tokens</returns>
     Task<DeviceToken[]> Get(Guid appId, string profileId);
+
+    /// <summary>
+    /// Gets all of the devices that are subscribed to the given group
+    /// </summary>
+    /// <param name="appId">The ID of the application</param>
+    /// <param name="groupId">The ID of the group</param>
+    /// <returns>The device tokens</returns>
+    Task<DeviceToken[]> ByGroup(Guid appId, Guid groupId);
+
+    /// <summary>
+    /// Gets all of the devices subscribed to a given map
+    /// </summary>
+    /// <param name="mapId">The ID of the group-topic mapping</param>
+    /// <returns>The device tokens</returns>
+    Task<DeviceToken[]> ByMap(Guid mapId);
 }
 
 /// <summary>
@@ -45,5 +60,39 @@ public class DeviceTokenDbService : OrmMap<DeviceToken>, IDeviceTokenDbService
              .With(a => a.ProfileId));
 
         return _sql.Get<DeviceToken>(_byAppProfile, new { ApplicationId = appId, ProfileId = profileId });
+    }
+
+    /// <summary>
+    /// Gets all of the devices that are subscribed to the given group
+    /// </summary>
+    /// <param name="appId">The ID of the application</param>
+    /// <param name="groupId">The ID of the group</param>
+    /// <returns>The device tokens</returns>
+    public Task<DeviceToken[]> ByGroup(Guid appId, Guid groupId)
+    {
+        const string QUERY = @"SELECT DISTINCT d.*
+FROM noti_device_tokens d
+JOIN noti_topic_group_subscription s ON s.profile_id = d.profile_id
+JOIN noti_topic_groups g ON g.id = s.group_id
+WHERE
+    g.application_id = :appId AND
+    g.id = :groupId;";
+        return _sql.Get<DeviceToken>(QUERY, new { appId, groupId });
+    }
+
+    /// <summary>
+    /// Gets all of the devices subscribed to a given map
+    /// </summary>
+    /// <param name="mapId">The ID of the group-topic mapping</param>
+    /// <returns>The device tokens</returns>
+    public Task<DeviceToken[]> ByMap(Guid mapId)
+    {
+        const string QUERY = @"SELECT DISTINCT d.*
+FROM noti_device_tokens d 
+JOIN noti_topic_subscriptions s ON s.profile_id = d.profile_id
+JOIN noti_topic_group_map m ON s.topic_id = m.topic_id AND s.group_id = m.group_id
+WHERE
+    m.id = :mapId;";
+        return _sql.Get<DeviceToken>(QUERY, new { mapId });
     }
 }

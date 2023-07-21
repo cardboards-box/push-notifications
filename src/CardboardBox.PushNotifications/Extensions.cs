@@ -2,6 +2,7 @@
 
 using Core;
 using Devices;
+using Groups;
 using Notifications;
 using Subscriptions;
 
@@ -18,11 +19,12 @@ public static class Extensions
     public static IDependencyResolver AddNotifications(this IDependencyResolver builder)
     {
         return builder
+            .Transient<IGroupService, GroupService>()
             .Transient<IKeyGenService, KeyGenService>()
+            .Transient<IDeviceService, DeviceService>()
             .Transient<INotificationService, NotificationService>()
             .Transient<ISubscriptionService, SubscriptionService>()
             .Transient<IUnsubscriptionService, UnsubscriptionService>()
-            .Transient<IDeviceService, DeviceService>()
 
             .Transient<IPushRollupService, PushRollupService>();
     }

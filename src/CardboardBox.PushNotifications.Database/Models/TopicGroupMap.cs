@@ -20,4 +20,20 @@ public class TopicGroupMap : DbObject
     [JsonPropertyName("groupId")]
     [Column("group_id", Unique = true)]
     public Guid GroupId { get; set; }
+
+    /// <summary>
+    /// Represents the `noti_topic_group_map` table.
+    /// </summary>
+    public TopicGroupMap() { }
+
+    /// <summary>
+    /// Represents the `noti_topic_group_map` table.
+    /// </summary>
+    /// <param name="topicId">The unique identifier of the topic</param>
+    /// <param name="groupId">The unique identifier of the group</param>
+    public TopicGroupMap(Guid topicId, Guid groupId)
+    {
+        TopicId = topicId;
+        GroupId = groupId;
+    }
 }

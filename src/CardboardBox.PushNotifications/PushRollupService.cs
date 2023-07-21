@@ -1,6 +1,7 @@
 ﻿namespace CardboardBox.PushNotifications;
 
 using Devices;
+using Groups;
 using Notifications;
 using Subscriptions;
 
@@ -28,6 +29,11 @@ public interface IPushRollupService
     /// Service handling unsubscriptions
     /// </summary>
     IUnsubscriptionService Unsubscriptions { get; }
+
+    /// <summary>
+    /// Service handling groups
+    /// </summary>
+    IGroupService Groups { get; }
 }
 
 /// <summary>
@@ -56,21 +62,29 @@ public class PushRollupService : IPushRollupService
     public IUnsubscriptionService Unsubscriptions { get; }
 
     /// <summary>
+    /// Service handling groups
+    /// </summary>
+    public IGroupService Groups { get; }
+
+    /// <summary>
     /// The implementation of the <see cref="IPushRollupService"/>
     /// </summary>
     /// <param name="devices">Service handling device management</param>
     /// <param name="notifications">Service handling sending notifications</param>
     /// <param name="subscriptions">Service handling subscriptions</param>
     /// <param name="unsubscriptions">Service handling unsubscriptions</param>
+    /// <param name="groups">Service handling groups</param>
     public PushRollupService(
         IDeviceService devices,
         INotificationService notifications,
         ISubscriptionService subscriptions,
-        IUnsubscriptionService unsubscriptions)
+        IUnsubscriptionService unsubscriptions,
+        IGroupService groups)
     {
         Devices = devices;
         Notifications = notifications;
         Subscriptions = subscriptions;
         Unsubscriptions = unsubscriptions;
+        Groups = groups;
     }
 }
