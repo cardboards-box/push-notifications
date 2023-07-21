@@ -21,4 +21,22 @@ public class TopicGroup : DbObject
     [JsonPropertyName("resourceId")]
     [Column("resource_id", Unique = true)]
     public string ResourceId { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Represents the `noti_topic_groups` table.
+    /// Contains the information regarding a group of topics.
+    /// </summary>
+    public TopicGroup() { }
+
+    /// <summary>
+    /// Represents the `noti_topic_groups` table.
+    /// Contains the information regarding a group of topics.
+    /// </summary>
+    /// <param name="applicationId">The foreign key that references which application this topic group belongs to.</param>
+    /// <param name="resourceId">The resource this group represents.</param>
+    public TopicGroup(Guid applicationId, string resourceId)
+    {
+        ApplicationId = applicationId;
+        ResourceId = resourceId;
+    }
 }

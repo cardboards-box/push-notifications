@@ -10,7 +10,7 @@ public enum PushDeviceType
     /// </summary>
     Unknown = 0,
     /// <summary>
-    /// Android mobile app
+    /// Android mobile app (Not supported yet)
     /// </summary>
     Android = 1,
     /// <summary>

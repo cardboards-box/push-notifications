@@ -4,10 +4,12 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\CardboardBox.PushNotifications.Database\CardboardBox.PushNotifications.Database.csproj" />
+		<ProjectReference Include="..\CardboardBox.PushNotifications.Fcm\CardboardBox.PushNotifications.Fcm.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

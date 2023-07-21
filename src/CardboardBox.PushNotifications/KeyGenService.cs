@@ -2,13 +2,27 @@
 
 namespace CardboardBox.PushNotifications;
 
+/// <summary>
+/// Service for generating keys
+/// </summary>
 public interface IKeyGenService
 {
+    /// <summary>
+    /// Generates a cryptographically secure key
+    /// </summary>
+    /// <returns>The cryptographically secure generated key</returns>
     string GenerateKey();
 }
 
+/// <summary>
+/// The implementation of the <see cref="IKeyGenService"/>
+/// </summary>
 public class KeyGenService : IKeyGenService
 {
+    /// <summary>
+    /// Generates a cryptographically secure key
+    /// </summary>
+    /// <returns>The cryptographically secure generated key</returns>
     public string GenerateKey()
     {
         using var aes = Aes.Create();

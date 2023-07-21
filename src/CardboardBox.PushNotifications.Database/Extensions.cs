@@ -4,8 +4,16 @@ using Core;
 using Models;
 using Services;
 
+/// <summary>
+/// The dependency injection extensions for the database
+/// </summary>
 public static class Extensions
 {
+    /// <summary>
+    /// Registers all of the database services and models
+    /// </summary>
+    /// <param name="builder">The dependency resolver to register with</param>
+    /// <returns>The dependency resolver for chaining</returns>
     public static IDependencyResolver AddDatabase(this IDependencyResolver builder)
     {
         builder

@@ -94,7 +94,8 @@ CREATE TABLE IF NOT EXISTS noti_topic_subscriptions (
 
 CREATE TABLE IF NOT EXISTS noti_history (
 	id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-
+	
+	application_id UUID NOT NULL REFERENCES noti_applications(id),
 	topic_id UUID REFERENCES noti_topics(id),
 	profile_id TEXT,
 	title TEXT NOT NULL,

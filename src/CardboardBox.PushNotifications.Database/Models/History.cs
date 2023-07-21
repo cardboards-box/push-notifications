@@ -10,6 +10,12 @@
 public class History : DbObject
 {
     /// <summary>
+    /// The application that sent the notification
+    /// </summary>
+    [JsonPropertyName("applicationId")]
+    public Guid ApplicationId { get; set; }
+
+    /// <summary>
     /// The data field sent on the notification
     /// </summary>
     [JsonPropertyName("data")]

@@ -1,7 +1,6 @@
-using CardboardBox.PushNotifications;
-using CardboardBox.PushNotifications.Database;
 using CardboardBox.PushNotifications.Web.Middleware;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +33,10 @@ builder
                 Array.Empty<string>()
             }
         });
+
+        // using System.Reflection;
+        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename), true);
     });
 
 builder
@@ -48,6 +51,7 @@ await builder
         bob => bob
             .AddDatabase()
             .AddNotifications()
+            .AddFcm()
     );
 
 var app = builder.Build();
